@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="css/style1.css"> <!-- Link to CSS file -->
+</head>
+<body>
+
+  <div class="bubbles">
+    <div class="bubble" style="width: 40px; height: 40px; left: 10%; animation-delay: 0s;"></div>
+    <div class="bubble" style="width: 60px; height: 60px; left: 30%; animation-delay: 1s;"></div>
+    <div class="bubble" style="width: 30px; height: 30px; left: 50%; animation-delay: 2s;"></div>
+    <div class="bubble" style="width: 50px; height: 50px; left: 70%; animation-delay: 3s;"></div>
+    <div class="bubble" style="width: 20px; height: 20px; left: 90%; animation-delay: 4s;"></div>
+  </div>
+
+  <div class="container">
+    <h2 style="color: #ff1493;">Login</h2>
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button id="loginBtn">Login</button>
+    <div id="errorMessage"></div>
+  </div>
+
+  <script>
+    function login() {
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+
+      if (username === 'ammu' && password === 'pabo') {
+        window.location.href = 'welcome.html'; // Redirect to welcome page
+      } else {
+        document.getElementById('errorMessage').innerText = 'Incorrect username or password';
+      }
+    }
+
+    document.getElementById('loginBtn').addEventListener('click', login);
+
+    // Trigger login on Enter key
+    document.addEventListener('keypress', function(event) {
+      if (event.key === 'Enter') {
+        login();
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    <link rel="stylesheet" href="css/styles.css"> <!-- Link to CSS file -->
+</head>
+<body>
+
+    <div class="bubbles">
+        <div class="bubble" style="width: 40px; height: 40px; left: 10%; animation-delay: 0s;"></div>
+        <div class="bubble" style="width: 60px; height: 60px; left: 30%; animation-delay: 1s;"></div>
+        <div class="bubble" style="width: 30px; height: 30px; left: 50%; animation-delay: 2s;"></div>
+        <div class="bubble" style="width: 50px; height: 50px; left: 70%; animation-delay: 3s;"></div>
+        <div class="bubble" style="width: 20px; height: 20px; left: 90%; animation-delay: 4s;"></div>
+    </div>
+
+    <div class="container">
+        <marquee>Happy Birthday, Ammu!</marquee>
+        <div id="loveQuote"></div>
+        <audio id="birthdayAudio" preload="auto">
+            <source src="audio/karthik.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <script>
+        const images = ['images/ammadi.jpg', 'images/ammadi1.jpg', 'images/ammadi2.png', 'images/ammadi4.jpg'];
+        const specialImage = 'images/we.png';
+        let cycleCount = 0;
+        const totalCycles = 25;
+        const changeInterval = 10000; // 10 seconds
+
+        function changeBackgroundImage() {
+            document.body.style.opacity = 0; // Fade out
+            setTimeout(() => {
+                document.body.style.backgroundImage = 
+                    (cycleCount < totalCycles - 1) ? 
+                    `url('${images[cycleCount % images.length]}')` : 
+                    `url('${specialImage}')`;
+                document.body.style.opacity = 1; // Fade in
+            }, 1000);
+            cycleCount++;
+        }
+
+        const quotes = [
+            "You light up my life in ways I can't explain.",
+            "Every moment with you is a treasure.",
+            "You are my greatest adventure and my comfort zone.",
+            "Your smile is my favorite reason to be happy.",
+            "With you, every day is a beautiful day.",
+            "You are my dream come true.",
+            "You mean the world to me.",
+            "Love is just a word until you came along.",
+            "Happy Birthday to my love, my life!",
+            "You are my heart's desire, now and forever."
+        ];
+
+        let quoteIndex = 0;
+        const quoteDisplayDuration = 10000; // 10 seconds
+
+        function displayQuote() {
+            const loveQuote = document.getElementById('loveQuote');
+            loveQuote.style.opacity = 0; // Fade out
+            setTimeout(() => {
+                loveQuote.textContent = quotes[quoteIndex];
+                loveQuote.style.opacity = 1; // Fade in
+                quoteIndex = (quoteIndex + 1) % quotes.length;
+            }, 1000);
+        }
+
+        const audio = document.getElementById('birthdayAudio');
+
+        document.body.addEventListener('dblclick', function() {
+            audio.play().then(() => {
+                audio.muted = false;
+                setInterval(displayQuote, quoteDisplayDuration);
+            }).catch((error) => {
+                console.log('Audio playback failed:', error);
+            });
+        });
+
+        // Change background image every 10 seconds
+        setInterval(changeBackgroundImage, changeInterval);
+        // Start by displaying the first quote
+        displayQuote();
+    </script>
+
+</body>
+</html>
